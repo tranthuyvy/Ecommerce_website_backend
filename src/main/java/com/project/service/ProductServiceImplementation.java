@@ -154,10 +154,6 @@ public class ProductServiceImplementation implements ProductService {
 		return products;
 	}
 
-
-
-	
-	
 	@Override
 	public Page<Product> getAllProduct(String category, List<String>colors, 
 			List<String> sizes, Integer minPrice, Integer maxPrice, 
@@ -172,8 +168,7 @@ public class ProductServiceImplementation implements ProductService {
 			products = products.stream()
 			        .filter(p -> colors.stream().anyMatch(c -> c.equalsIgnoreCase(p.getColor())))
 			        .collect(Collectors.toList());
-		
-		
+
 		} 
 
 		if(stock!=null) {
@@ -193,8 +188,7 @@ public class ProductServiceImplementation implements ProductService {
 		List<Product> pageContent = products.subList(startIndex, endIndex);
 		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable, products.size());
 	    return filteredProducts; // If color list is empty, do nothing and return all products
-		
-		
+
 	}
 
 }
