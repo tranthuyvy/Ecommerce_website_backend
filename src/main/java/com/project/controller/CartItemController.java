@@ -33,10 +33,10 @@ public class CartItemController {
 	@DeleteMapping("/{cartItemId}")
 	public ResponseEntity<ApiResponse>deleteCartItemHandler(@PathVariable Long cartItemId, @RequestHeader("Authorization")String jwt) throws CartItemException, UserException{
 		
-		User user=userService.findUserProfileByJwt(jwt);
+		User user = userService.findUserProfileByJwt(jwt);
 		cartItemService.removeCartItem(user.getId(), cartItemId);
 		
-		ApiResponse res=new ApiResponse("Item Remove From Cart",true);
+		ApiResponse res = new ApiResponse("Item Remove From Cart",true);
 		
 		return new ResponseEntity<ApiResponse>(res,HttpStatus.ACCEPTED);
 	}
@@ -44,11 +44,11 @@ public class CartItemController {
 	@PutMapping("/{cartItemId}")
 	public ResponseEntity<CartItem>updateCartItemHandler(@PathVariable Long cartItemId, @RequestBody CartItem cartItem, @RequestHeader("Authorization")String jwt) throws CartItemException, UserException{
 		
-		User user=userService.findUserProfileByJwt(jwt);
+		User user = userService.findUserProfileByJwt(jwt);
 		
-		CartItem updatedCartItem =cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
+		CartItem updatedCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
 		
-		//ApiResponse res=new ApiResponse("Item Updated",true);
+		//ApiResponse res = new ApiResponse("Item Updated",true);
 		
 		return new ResponseEntity<>(updatedCartItem,HttpStatus.ACCEPTED);
 	}

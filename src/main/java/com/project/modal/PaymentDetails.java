@@ -14,7 +14,7 @@ public class PaymentDetails {
 	private String razorpayPaymentId​;
 	
 	public PaymentDetails() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public String getRazorpayPaymentLinkId() {
@@ -67,7 +67,5 @@ public class PaymentDetails {
 	public void setStatus(PaymentStatus status) {
 		this.status = status;
 	}
-	
-	
 
 }

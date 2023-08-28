@@ -34,7 +34,7 @@ public class Rating {
     private LocalDateTime createdAt;
 
     public Rating() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Rating(Long id, User user, Product product, double rating, LocalDateTime createdAt) {
@@ -49,6 +49,9 @@ public class Rating {
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
+
+	//getter and setter
+
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -85,8 +88,5 @@ public class Rating {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
-
-  
-
 
 }

@@ -9,7 +9,7 @@ public class ErrorDetails {
 	private LocalDateTime timestamp;
 
 	public ErrorDetails() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public ErrorDetails(String error, String details, LocalDateTime timestamp) {

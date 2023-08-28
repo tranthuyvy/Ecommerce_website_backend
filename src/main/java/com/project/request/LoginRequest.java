@@ -4,12 +4,10 @@ public class LoginRequest {
 	
 	private String email;
 	private String password;
-	
-	
-	public LoginRequest() {
-		// TODO Auto-generated constructor stub
-	}
 
+	public LoginRequest() {
+
+	}
 
 	public LoginRequest(String email, String password) {
 		super();
@@ -17,11 +15,11 @@ public class LoginRequest {
 		this.password = password;
 	}
 
+	//getter and setter
 
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -36,7 +34,5 @@ public class LoginRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }

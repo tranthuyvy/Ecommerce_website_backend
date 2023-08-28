@@ -30,24 +30,19 @@ public class Category {
 
     private int level;
     
-    
 	public Category() {
-		// TODO Auto-generated constructor stub
+
 	}
-	
 
-	
-
+	//getter and setter
 
 	public int getLevel() {
 		return level;
 	}
 
-
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -72,8 +67,5 @@ public class Category {
 	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
 	}
-
-	
-    
 
 }

@@ -1,7 +1,5 @@
 package com.project.modal;
 
-
-
 import com.project.user.domain.OrderStatus;
 
 import jakarta.persistence.CascadeType;
@@ -66,6 +64,8 @@ public class Order {
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
+
+	//getter and setter
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -175,7 +175,4 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-    // constructors, getters and setters
-    
-    
 }

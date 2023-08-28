@@ -6,7 +6,7 @@ public class PaymentLinkResponse {
 	private String payment_link_id;
 	
 	public PaymentLinkResponse() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public PaymentLinkResponse(String payment_link_url, String payment_link_id) {
@@ -14,6 +14,8 @@ public class PaymentLinkResponse {
 		this.payment_link_url = payment_link_url;
 		this.payment_link_id = payment_link_id;
 	}
+
+	//getter and setter
 
 	public String getPayment_link_url() {
 		return payment_link_url;

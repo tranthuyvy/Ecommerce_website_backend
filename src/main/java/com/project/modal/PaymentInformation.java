@@ -18,7 +18,6 @@ public class PaymentInformation {
 	    @Column(name = "cvv")
 	    private String cvv;
 
-	    // getters and setters
-	}
+}
 
 

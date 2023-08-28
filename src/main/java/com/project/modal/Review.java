@@ -48,6 +48,8 @@ public class Review {
 		return createdAt;
 	}
 
+	//setter and getter
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
@@ -83,7 +85,5 @@ public class Review {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
 
 }

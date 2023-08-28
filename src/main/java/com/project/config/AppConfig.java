@@ -38,12 +38,9 @@ public class AppConfig {
 						CorsConfiguration cfg = new CorsConfiguration();
 						
 						cfg.setAllowedOrigins(Arrays.asList(
-								
-								"http://localhost:3000", 
+								"http://localhost:3000", //React
 								"http://localhost:4000",
-								"http://localhost:4200",
-								"https://shopwithzosh.vercel.app"
-								
+								"http://localhost:4200"	//Angular
 							)
 						);
 						//cfg.setAllowedMethods(Arrays.asList("GET", "POST","DELETE","PUT"));
@@ -53,7 +50,6 @@ public class AppConfig {
 						cfg.setExposedHeaders(Arrays.asList("Authorization"));
 						cfg.setMaxAge(3600L);
 						return cfg;
-						
 					}
 				})
 		.and()
@@ -62,12 +58,10 @@ public class AppConfig {
 		.formLogin();
 		
 		return http.build();
-		
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }

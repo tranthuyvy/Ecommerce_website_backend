@@ -41,10 +41,10 @@ public class AdminProductController {
 	@DeleteMapping("/{productId}/delete")
 	public ResponseEntity<ApiResponse> deleteProductHandler(@PathVariable Long productId) throws ProductException{
 		
-		System.out.println("dlete product controller .... ");
-		String msg=productService.deleteProduct(productId);
-		System.out.println("dlete product controller .... msg "+msg);
-		ApiResponse res=new ApiResponse(msg,true);
+		System.out.println("delete product controller .... ");
+		String msg = productService.deleteProduct(productId);
+		System.out.println("delete product controller .... msg " + msg);
+		ApiResponse res = new ApiResponse(msg,true);
 		
 		return new ResponseEntity<ApiResponse>(res,HttpStatus.ACCEPTED);
 		
@@ -61,7 +61,7 @@ public class AdminProductController {
 	@PutMapping("/{productId}/update")
 	public ResponseEntity<Product> updateProductHandler(@RequestBody Product req,@PathVariable Long productId) throws ProductException{
 		
-		Product updatedProduct=productService.updateProduct(productId, req);
+		Product updatedProduct = productService.updateProduct(productId, req);
 		
 		return new ResponseEntity<Product>(updatedProduct,HttpStatus.OK);
 	}
@@ -73,7 +73,7 @@ public class AdminProductController {
 			productService.createProduct(product);
 		}
 		
-		ApiResponse res=new ApiResponse("products created successfully",true);
+		ApiResponse res = new ApiResponse("products created successfully",true);
 		return new ResponseEntity<ApiResponse>(res,HttpStatus.ACCEPTED);
 	}
 

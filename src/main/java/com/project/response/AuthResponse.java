@@ -7,7 +7,7 @@ public class AuthResponse {
 	private boolean status;
 	
 	public AuthResponse() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public AuthResponse(String jwt, boolean status) {
@@ -15,6 +15,8 @@ public class AuthResponse {
 		this.jwt = jwt;
 		this.status = status;
 	}
+
+	//getter and setter
 
 	public String getJwt() {
 		return jwt;
@@ -31,7 +33,5 @@ public class AuthResponse {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
-	
 
 }

@@ -36,9 +36,9 @@ public class PaymentController {
 	private OrderRepository orderRepository;
 	
 	public PaymentController(OrderService orderService,UserService userService,OrderRepository orderRepository) {
-		this.orderService=orderService;
-		this.userService=userService;
-		this.orderRepository=orderRepository;
+		this.orderService = orderService;
+		this.userService = userService;
+		this.orderRepository = orderRepository;
 	}
 	
 	@PostMapping("/payments/{orderId}")
@@ -46,7 +46,7 @@ public class PaymentController {
 			@RequestHeader("Authorization")String jwt) 
 					throws RazorpayException, UserException, OrderException{
 		
-		Order order=orderService.findOrderById(orderId);
+		Order order = orderService.findOrderById(orderId);
 		 try {
 		      // Instantiate a Razorpay client with your key ID and secret
 		      RazorpayClient razorpay = new RazorpayClient("rzp_test_kTsRSaDC8hwztX", "LieoD1s9mxMIv569PcgRDMcU");
@@ -57,11 +57,10 @@ public class PaymentController {
 		      paymentLinkRequest.put("currency","INR");    
 //		      paymentLinkRequest.put("expire_by",1691097057);
 //		      paymentLinkRequest.put("reference_id",order.getId().toString());
-		     
 
 		      // Create a JSON object with the customer details
 		      JSONObject customer = new JSONObject();
-		      customer.put("name",order.getUser().getFirstName()+" "+order.getUser().getLastName());
+		      customer.put("name",order.getUser().getFirstName() + " " + order.getUser().getLastName());
 		      customer.put("contact",order.getUser().getMobile());
 		      customer.put("email",order.getUser().getEmail());
 		      paymentLinkRequest.put("customer",customer);
@@ -76,7 +75,7 @@ public class PaymentController {
 		      paymentLinkRequest.put("reminder_enable",true);
 
 		      // Set the callback URL and method
-		      paymentLinkRequest.put("callback_url","https://shopwithzosh.vercel.app/payment/"+orderId);
+		      paymentLinkRequest.put("callback_url","https://shopwithzosh.vercel.app/payment/" + orderId);
 		      paymentLinkRequest.put("callback_method","get");
 
 		      // Create the payment link using the paymentLink.create() method
@@ -85,7 +84,7 @@ public class PaymentController {
 		      String paymentLinkId = payment.get("id");
 		      String paymentLinkUrl = payment.get("short_url");
 		      
-		      PaymentLinkResponse res=new PaymentLinkResponse(paymentLinkUrl,paymentLinkId);
+		      PaymentLinkResponse res = new PaymentLinkResponse(paymentLinkUrl,paymentLinkId);
 		      
 		      PaymentLink fetchedPayment = razorpay.paymentLink.fetch(paymentLinkId);
 		      
@@ -104,24 +103,20 @@ public class PaymentController {
 		      System.out.println("Error creating payment link: " + e.getMessage());
 		      throw new RazorpayException(e.getMessage());
 		    }
-		
-		
-//		order_id
 	}
 	
   @GetMapping("/payments")
   public ResponseEntity<ApiResponse> redirect(@RequestParam(name="payment_id") String paymentId,@RequestParam("order_id")Long orderId) throws RazorpayException, OrderException {
 	  RazorpayClient razorpay = new RazorpayClient("rzp_test_kTsRSaDC8hwztX", "LieoD1s9mxMIv569PcgRDMcU");
-	  Order order =orderService.findOrderById(orderId);
+	  Order order = orderService.findOrderById(orderId);
 	
 	  try {
-		
-		
+
 		Payment payment = razorpay.payments.fetch(paymentId);
-		System.out.println("payment details --- "+payment+payment.get("status"));
+		System.out.println("payment details --- " + payment + payment.get("status"));
 		
 		if(payment.get("status").equals("captured")) {
-			System.out.println("payment details --- "+payment+payment.get("status"));
+			System.out.println("payment details --- " + payment + payment.get("status"));
 		  
 			order.getPaymentDetails().setPaymentId(paymentId);
 			order.getPaymentDetails().setStatus(PaymentStatus.COMPLETED);
@@ -134,11 +129,9 @@ public class PaymentController {
 	      return new ResponseEntity<ApiResponse>(res,HttpStatus.OK);
 	      
 	} catch (Exception e) {
-		System.out.println("errrr payment -------- ");
+		System.out.println("error payment -------- ");
 		new RedirectView("https://shopwithzosh.vercel.app/payment/failed");
 		throw new RazorpayException(e.getMessage());
 	}
-
   }
-
 }

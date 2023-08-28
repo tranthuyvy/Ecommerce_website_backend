@@ -105,6 +105,8 @@ public class Product {
 		return createdAt;
 	}
 
+	//getter and setter
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
@@ -251,8 +253,4 @@ public class Product {
 				&& Objects.equals(ratings, other.ratings) && Objects.equals(reviews, other.reviews)
 				&& Objects.equals(sizes, other.sizes) && Objects.equals(title, other.title);
 	}
-
-	
-
-   
 }

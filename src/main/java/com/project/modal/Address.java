@@ -59,6 +59,7 @@ public class Address {
 		this.mobile = mobile;
 	}
 
+	//getter and setter
 
 	public String getFirstName() {
 		return firstName;
@@ -148,7 +149,5 @@ public class Address {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-    
-    
 
 }

@@ -44,7 +44,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/user")
-	public ResponseEntity< List<Order>> usersOrderHistoryHandler(@RequestHeader("Authorization") 
+	public ResponseEntity< List<Order> > usersOrderHistoryHandler(@RequestHeader("Authorization")
 	String jwt) throws OrderException, UserException{
 		
 		User user=userService.findUserProfileByJwt(jwt);
@@ -60,5 +60,4 @@ public class OrderController {
 		Order orders=orderService.findOrderById(orderId);
 		return new ResponseEntity<>(orders,HttpStatus.ACCEPTED);
 	}
-
 }

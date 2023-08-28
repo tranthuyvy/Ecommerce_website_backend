@@ -49,6 +49,8 @@ public class CartItem {
 		this.userId = userId;
 	}
 
+	//getter and setter
+
 	public Integer getDiscountedPrice() {
 		return discountedPrice;
 	}
@@ -113,8 +115,6 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, price, product, size);
@@ -132,6 +132,5 @@ public class CartItem {
 		return Objects.equals(id, other.id) && Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(product, other.product) && Objects.equals(size, other.size);
 	}
-	
-	
+
 }

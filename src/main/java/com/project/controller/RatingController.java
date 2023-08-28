@@ -28,22 +28,22 @@ public class RatingController {
 	private RatingServices ratingServices;
 	
 	public RatingController(UserService userService,RatingServices ratingServices) {
-		this.ratingServices=ratingServices;
-		this.userService=userService;
+		this.ratingServices = ratingServices;
+		this.userService = userService;
 		// TODO Auto-generated constructor stub
 	}
 
 	@PostMapping("/create")
 	public ResponseEntity<Rating> createRatingHandler(@RequestBody RatingRequest req,@RequestHeader("Authorization") String jwt) throws UserException, ProductException{
-		User user=userService.findUserProfileByJwt(jwt);
-		Rating rating=ratingServices.createRating(req, user);
+		User user = userService.findUserProfileByJwt(jwt);
+		Rating rating = ratingServices.createRating(req, user);
 		return new ResponseEntity<>(rating,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/product/{productId}")
 	public ResponseEntity<List<Rating>> getProductsReviewHandler(@PathVariable Long productId){
 	
-		List<Rating> ratings=ratingServices.getProductsRating(productId);
+		List<Rating> ratings = ratingServices.getProductsRating(productId);
 		return new ResponseEntity<>(ratings,HttpStatus.OK);
 	}
 }

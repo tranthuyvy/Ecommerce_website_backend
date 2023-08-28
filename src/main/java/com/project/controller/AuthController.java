@@ -35,11 +35,11 @@ public class AuthController {
 	private CartService cartService;
 	
 	public AuthController(UserRepository userRepository,PasswordEncoder passwordEncoder,JwtTokenProvider jwtTokenProvider,CustomUserDetails customUserDetails,CartService cartService) {
-		this.userRepository=userRepository;
-		this.passwordEncoder=passwordEncoder;
-		this.jwtTokenProvider=jwtTokenProvider;
-		this.customUserDetails=customUserDetails;
-		this.cartService=cartService;
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.jwtTokenProvider = jwtTokenProvider;
+		this.customUserDetails = customUserDetails;
+		this.cartService = cartService;
 	}
 	
 	@PostMapping("/signup")
@@ -47,27 +47,25 @@ public class AuthController {
 		
 		  	String email = user.getEmail();
 	        String password = user.getPassword();
-	        String firstName=user.getFirstName();
-	        String lastName=user.getLastName();
+	        String firstName = user.getFirstName();
+	        String lastName = user.getLastName();
 	        
-	        User isEmailExist=userRepository.findByEmail(email);
+	        User isEmailExist = userRepository.findByEmail(email);
 
 	        // Check if user with the given email already exists
-	        if (isEmailExist!=null) {
+	        if (isEmailExist != null) {
 	        // System.out.println("--------- exist "+isEmailExist).getEmail());
 	        	
 	            throw new UserException("Email Is Already Used With Another Account");
 	        }
 
 	        // Create new user
-			User createdUser= new User();
+			User createdUser = new User();
 			createdUser.setEmail(email);
 			createdUser.setFirstName(firstName);
 			createdUser.setLastName(lastName);
 	        createdUser.setPassword(passwordEncoder.encode(password));
-	        
-	        
-	        
+
 	        User savedUser= userRepository.save(createdUser);
 	        
 	        cartService.createCart(savedUser);
@@ -77,7 +75,7 @@ public class AuthController {
 	        
 	        String token = jwtTokenProvider.generateToken(authentication);
 
-	        AuthResponse authResponse= new AuthResponse(token,true);
+	        AuthResponse authResponse = new AuthResponse(token,true);
 			
 	        return new ResponseEntity<AuthResponse>(authResponse,HttpStatus.OK);
 		
@@ -88,14 +86,13 @@ public class AuthController {
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         
-        System.out.println(username +" ----- "+password);
+        System.out.println(username + " && "+password);
         
         Authentication authentication = authenticate(username, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        
+
         String token = jwtTokenProvider.generateToken(authentication);
-        AuthResponse authResponse= new AuthResponse();
+        AuthResponse authResponse = new AuthResponse();
 		
 		authResponse.setStatus(true);
 		authResponse.setJwt(token);
@@ -106,7 +103,7 @@ public class AuthController {
 	private Authentication authenticate(String username, String password) {
         UserDetails userDetails = customUserDetails.loadUserByUsername(username);
         
-        System.out.println("sign in userDetails - "+userDetails);
+        System.out.println("sign in userDetails - " + userDetails);
         
         if (userDetails == null) {
         	System.out.println("sign in userDetails - null " + userDetails);

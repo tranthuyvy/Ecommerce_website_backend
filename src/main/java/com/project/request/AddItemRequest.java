@@ -3,13 +3,19 @@ package com.project.request;
 public class AddItemRequest {
 
 	private Long productId;
+
 	private String size;
+
 	private int quantity;
+
 	private Integer price;
 	
 	public AddItemRequest() {
 		
 	}
+
+	//getter and setter
+
 	public Long getProductId() {
 		return productId;
 	}
@@ -34,6 +40,5 @@ public class AddItemRequest {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
-	
+
 }

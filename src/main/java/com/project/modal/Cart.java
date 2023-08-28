@@ -40,7 +40,7 @@ public class Cart {
     private int discounte;
     
 	public Cart() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Cart(Long id, User user, Set<CartItem> cartItems, double totalPrice, int totalItem) {
@@ -51,6 +51,8 @@ public class Cart {
 		this.totalPrice = totalPrice;
 		this.totalItem = totalItem;
 	}
+
+	//getter and setter
 
 	public int getTotalDiscountedPrice() {
 		return totalDiscountedPrice;

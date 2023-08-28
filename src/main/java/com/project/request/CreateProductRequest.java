@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.project.modal.Size;
 
-
 public class CreateProductRequest {
 	
     private String title;
@@ -29,8 +28,12 @@ public class CreateProductRequest {
     private String imageUrl;
 
     private String topLavelCategory;
+
     private String secondLavelCategory;
+
     private String thirdLavelCategory;
+
+	//getter and setter
 
 	public Set<Size> getSize() {
 		return size;
@@ -38,7 +41,6 @@ public class CreateProductRequest {
 	public void setSize(Set<Size> size) {
 		this.size = size;
 	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -133,7 +135,4 @@ public class CreateProductRequest {
 		this.thirdLavelCategory = thirdLavelCategory;
 	}
 
-	
-    
-    
 }
