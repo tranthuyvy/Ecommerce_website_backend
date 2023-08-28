@@ -16,7 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	@Query("SELECT p From Product p where LOWER(p.title) Like %:query% OR LOWER(p.description) Like %:query% OR LOWER(p.brand) LIKE %:query% OR LOWER(p.category.name) LIKE %:query%")
 	public List<Product> searchProduct(@Param("query")String query);
 	
-	@Query("SELECT p FROM Product p " +
+	@Query(
+			"SELECT p FROM Product p " +
 	        "WHERE (p.category.name = :category OR :category = '') " +
 	        "AND ((:minPrice IS NULL AND :maxPrice IS NULL) OR (p.discountedPrice BETWEEN :minPrice AND :maxPrice)) " +
 		    "AND (:minDiscount IS NULL OR p.discountPersent >= :minDiscount) " +
