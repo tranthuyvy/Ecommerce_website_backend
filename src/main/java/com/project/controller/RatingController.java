@@ -30,7 +30,7 @@ public class RatingController {
 	public RatingController(UserService userService,RatingServices ratingServices) {
 		this.ratingServices = ratingServices;
 		this.userService = userService;
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@PostMapping("/create")

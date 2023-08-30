@@ -139,7 +139,7 @@ public class ProductServiceImplementation implements ProductService {
 	@Override
 	public List<Product> findProductByCategory(String category) {
 		
-		System.out.println("category --> "+category);
+		System.out.println("category --> " + category);
 		
 		List<Product> products = productRepository.findByCategory(category);
 		
