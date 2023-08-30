@@ -36,7 +36,7 @@ public class CartItemController {
 		User user = userService.findUserProfileByJwt(jwt);
 		cartItemService.removeCartItem(user.getId(), cartItemId);
 		
-		ApiResponse res = new ApiResponse("Item Remove From Cart",true);
+		ApiResponse res = new ApiResponse("Remove Item Cart Success",true);
 		
 		return new ResponseEntity<ApiResponse>(res,HttpStatus.ACCEPTED);
 	}

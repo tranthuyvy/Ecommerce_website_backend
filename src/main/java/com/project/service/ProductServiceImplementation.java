@@ -1,6 +1,5 @@
 package com.project.service;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -46,22 +45,22 @@ public class ProductServiceImplementation implements ProductService {
 			topLevel= categoryRepository.save(topLavelCategory);
 		}
 		
-		Category secondLevel=categoryRepository.
+		Category secondLevel = categoryRepository.
 				findByNameAndParant(req.getSecondLavelCategory(),topLevel.getName());
 		if(secondLevel==null) {
 			
-			Category secondLavelCategory=new Category();
+			Category secondLavelCategory = new Category();
 			secondLavelCategory.setName(req.getSecondLavelCategory());
 			secondLavelCategory.setParentCategory(topLevel);
 			secondLavelCategory.setLevel(2);
 			
-			secondLevel= categoryRepository.save(secondLavelCategory);
+			secondLevel = categoryRepository.save(secondLavelCategory);
 		}
 
-		Category thirdLevel=categoryRepository.findByNameAndParant(req.getThirdLavelCategory(),secondLevel.getName());
-		if(thirdLevel==null) {
+		Category thirdLevel = categoryRepository.findByNameAndParant(req.getThirdLavelCategory(),secondLevel.getName());
+		if(thirdLevel == null) {
 			
-			Category thirdLavelCategory=new Category();
+			Category thirdLavelCategory = new Category();
 			thirdLavelCategory.setName(req.getThirdLavelCategory());
 			thirdLavelCategory.setParentCategory(secondLevel);
 			thirdLavelCategory.setLevel(3);
@@ -69,7 +68,7 @@ public class ProductServiceImplementation implements ProductService {
 			thirdLevel=categoryRepository.save(thirdLavelCategory);
 		}
 
-		Product product=new Product();
+		Product product = new Product();
 		product.setTitle(req.getTitle());
 		product.setColor(req.getColor());
 		product.setDescription(req.getDescription());

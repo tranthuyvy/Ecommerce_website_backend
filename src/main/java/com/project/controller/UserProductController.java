@@ -31,7 +31,7 @@ public class UserProductController {
 			@RequestParam Integer maxPrice, @RequestParam Integer minDiscount, @RequestParam String sort, 
 			@RequestParam String stock, @RequestParam Integer pageNumber,@RequestParam Integer pageSize){
 
-		Page<Product> res = productService.getAllProduct(category, color, size, minPrice, maxPrice, minDiscount, sort,stock,pageNumber,pageSize);
+		Page<Product> res = productService.getAllProduct(category, color, size, minPrice, maxPrice, minDiscount, sort, stock, pageNumber, pageSize);
 		
 		System.out.println("complete products");
 		return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
