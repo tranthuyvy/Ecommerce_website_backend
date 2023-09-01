@@ -24,6 +24,12 @@ public class UserProductController {
 	public UserProductController(ProductService productService) {
 		this.productService=productService;
 	}
+
+	@GetMapping("/products/category/{category}")
+	public ResponseEntity<List<Product>> findProductByCategory(@PathVariable String category) {
+		List<Product> products = productService.findProductByCategory(category);
+		return new ResponseEntity<>(products, HttpStatus.OK);
+	}
 	
 	@GetMapping("/products")
 	public ResponseEntity<Page<Product>> findProductByCategoryHandler(@RequestParam String category,
