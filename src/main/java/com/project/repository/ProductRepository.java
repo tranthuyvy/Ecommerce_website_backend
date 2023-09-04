@@ -10,6 +10,9 @@ import com.project.modal.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+	@Query("SELECT p FROM Product p WHERE LOWER(p.brand) = LOWER(:brand)")
+	List<Product> findByBrand(@Param("brand") String brand);
+
 	@Query("SELECT p From Product p Where LOWER(p.category.name)=:category")
 	public List<Product> findByCategory(@Param("category") String category);
 	

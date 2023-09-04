@@ -147,6 +147,16 @@ public class ProductServiceImplementation implements ProductService {
 	}
 
 	@Override
+	public List<Product> findProductByBrand(String brand) {
+
+		System.out.println("brand --> " + brand);
+
+		List<Product> products = productRepository.findByBrand(brand);
+
+		return products;
+	}
+
+	@Override
 	public List<Product> searchProduct(String query) {
 		List<Product> products=productRepository.searchProduct(query);
 		return products;

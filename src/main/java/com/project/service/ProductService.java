@@ -23,6 +23,8 @@ public interface ProductService {
 	public Product findProductById(Long id) throws ProductException;
 	
 	public List<Product> findProductByCategory(String category);
+
+	public List<Product> findProductByBrand(String brand);
 	
 	public List<Product> searchProduct(String query);
 	
