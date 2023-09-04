@@ -9,4 +9,6 @@ public interface UserService {
 	
 	public User findUserProfileByJwt(String jwt) throws UserException;
 
+	public User updateUserProfileByJwt (String jwt, User updateUser) throws UserException;
+
 }
