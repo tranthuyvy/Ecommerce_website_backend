@@ -2,15 +2,11 @@ package com.project.controller;
 
 import java.util.List;
 
+import com.project.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.project.exception.OrderException;
 import com.project.exception.UserException;
@@ -26,6 +22,9 @@ public class OrderController {
 	
 	private OrderService orderService;
 	private UserService userService;
+
+	@Autowired
+	private OrderRepository orderRepository;
 	
 	public OrderController(OrderService orderService,UserService userService) {
 		this.orderService=orderService;
@@ -59,5 +58,33 @@ public class OrderController {
 		User user=userService.findUserProfileByJwt(jwt);
 		Order orders=orderService.findOrderById(orderId);
 		return new ResponseEntity<>(orders,HttpStatus.ACCEPTED);
+	}
+
+	@GetMapping("/placed")
+	public ResponseEntity<List<Order>> getPlacedOrdersForUser(@RequestHeader("Authorization") String jwt) throws UserException{
+		User user = userService.findUserProfileByJwt(jwt);
+		List<Order> placedOrders = orderRepository.getPlacedOrders(user.getId());
+		return new ResponseEntity<>(placedOrders, HttpStatus.OK);
+	}
+
+	@GetMapping("/confirmed")
+	public ResponseEntity<List<Order>> getConfirmedOrdersForUser(@RequestHeader("Authorization") String jwt) throws UserException{
+		User user = userService.findUserProfileByJwt(jwt);
+		List<Order> confirmedOrders = orderRepository.getConfirmedOrders(user.getId());
+		return new ResponseEntity<>(confirmedOrders, HttpStatus.OK);
+	}
+
+	@GetMapping("/shipped")
+	public ResponseEntity<List<Order>> getShippedOrdersForUser(@RequestHeader("Authorization") String jwt) throws UserException{
+		User user = userService.findUserProfileByJwt(jwt);
+		List<Order> shippedOrders = orderRepository.getShippedOrders(user.getId());
+		return new ResponseEntity<>(shippedOrders, HttpStatus.OK);
+	}
+
+	@GetMapping("/delivered")
+	public ResponseEntity<List<Order>> getDeliveredOrdersForUser(@RequestHeader("Authorization") String jwt) throws UserException{
+		User user = userService.findUserProfileByJwt(jwt);
+		List<Order> deliveredOrders = orderRepository.getDeliveredOrders(user.getId());
+		return new ResponseEntity<>(deliveredOrders, HttpStatus.OK);
 	}
 }
