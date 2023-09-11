@@ -44,15 +44,12 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException{
-		
 		  	String email = user.getEmail();
 	        String password = user.getPassword();
 	        String firstName = user.getFirstName();
 	        String lastName = user.getLastName();
-	        
 	        User isEmailExist = userRepository.findByEmail(email);
-
-	        // Check if user with the given email already exists
+	        // Check email exists
 	        if (isEmailExist != null) {
 	        // System.out.println("--------- exist "+isEmailExist).getEmail());
 	        	
@@ -76,7 +73,6 @@ public class AuthController {
 	        String token = jwtTokenProvider.generateToken(authentication);
 
 	        AuthResponse authResponse = new AuthResponse(token,true);
-			
 	        return new ResponseEntity<AuthResponse>(authResponse,HttpStatus.OK);
 		
 	}

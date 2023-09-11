@@ -37,7 +37,7 @@ public class CartController {
 		
 		Cart cart = cartService.findUserCart(user.getId());
 		
-		System.out.println("cart - "+cart.getUser().getEmail());
+		System.out.println("cart - " + cart.getUser().getEmail());
 		
 		return new ResponseEntity<Cart>(cart,HttpStatus.OK);
 	}
