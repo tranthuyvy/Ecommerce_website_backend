@@ -50,18 +50,10 @@ public class CartController {
 		
 	}
 
-	@DeleteMapping("/clear")
+	@PostMapping("/clear")
 	public ResponseEntity<ApiResponse> clearCart(@RequestHeader("Authorization") String jwt) throws UserException {
-		try {
-			User user = userService.findUserProfileByJwt(jwt);
-
-			cartService.clearCart(user.getId());
-
-			ApiResponse response = new ApiResponse("Cart cleared successfully", true);
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		} catch (Exception e) {
-			ApiResponse response = new ApiResponse("Error", false);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		User user = userService.findUserProfileByJwt(jwt);
+		cartService.clearCart(user.getId());
+		return new ResponseEntity<>(new ApiResponse("Cart cleared successfully", true), HttpStatus.OK);
 	}
 }
