@@ -80,4 +80,14 @@ public class CartServiceImplementation implements CartService{
 		return "Item Add To Cart";
 	}
 
+	@Override
+	public void clearCart(Long userId) {
+		Cart cart = cartRepository.findByUserId(userId);
+
+		if (cart != null) {
+			cart.getCartItems().clear();
+			cartRepository.save(cart);
+		}
+	}
+
 }
