@@ -108,8 +108,7 @@ public class OrderServiceImplementation implements OrderService {
 	public Order confirmedOrder(Long orderId) throws OrderException {
 		Order order=findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.CONFIRMED);
-		
-		
+
 		return orderRepository.save(order);
 	}
 
@@ -135,6 +134,16 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
+	public Order deleteOrder(Long orderId) throws OrderException {
+//		Order order = findOrderById(orderId);
+
+//		orderRepository.deleteById(orderId);
+		Order order = findOrderById(orderId);
+		order.setOrderStatus(OrderStatus.CANCELLED);
+		return orderRepository.save(order);
+	}
+
+	@Override
 	public Order findOrderById(Long orderId) throws OrderException {
 		Optional<Order> opt=orderRepository.findById(orderId);
 		
@@ -146,7 +155,7 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public List<Order> usersOrderHistory(Long userId) {
-		List<Order> orders=orderRepository.getUsersOrders(userId);
+		List<Order> orders = orderRepository.getUsersOrders(userId);
 		return orders;
 	}
 
@@ -155,14 +164,6 @@ public class OrderServiceImplementation implements OrderService {
 		Sort sortByCreatedAtDesc = Sort.by(Sort.Direction.DESC, "createdAt");
 		
 		return orderRepository.findAll(sortByCreatedAtDesc);
-	}
-
-	@Override
-	public void deleteOrder(Long orderId) throws OrderException {
-		Order order = findOrderById(orderId);
-		
-		orderRepository.deleteById(orderId);
-		
 	}
 
 }
