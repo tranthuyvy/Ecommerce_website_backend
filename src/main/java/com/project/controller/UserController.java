@@ -13,6 +13,8 @@ import com.project.exception.UserException;
 import com.project.modal.User;
 import com.project.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -21,6 +23,12 @@ public class UserController {
 	
 	public UserController(UserService userService) {
 		this.userService = userService;
+	}
+
+	@GetMapping("/all")
+	public ResponseEntity<List<User>> getAllUsersHandler() throws UserException {
+		List<User> users = userService.getAllUsers();
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 	
 	@GetMapping("/profile")
