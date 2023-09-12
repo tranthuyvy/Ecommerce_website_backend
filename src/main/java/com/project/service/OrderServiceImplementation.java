@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.exception.OrderException;
@@ -151,13 +152,14 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public List<Order> getAllOrders() {
+		Sort sortByCreatedAtDesc = Sort.by(Sort.Direction.DESC, "createdAt");
 		
-		return orderRepository.findAll();
+		return orderRepository.findAll(sortByCreatedAtDesc);
 	}
 
 	@Override
 	public void deleteOrder(Long orderId) throws OrderException {
-		Order order =findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		
 		orderRepository.deleteById(orderId);
 		
