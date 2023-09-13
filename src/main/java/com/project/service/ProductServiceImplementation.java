@@ -107,13 +107,45 @@ public class ProductServiceImplementation implements ProductService {
 	public Product updateProduct(Long productId, Product req) throws ProductException {
 
 		Product product = findProductById(productId);
+
+		if (req.getImageUrl() != null) {
+			product.setImageUrl(req.getImageUrl());
+		}
+
+		if (req.getTitle() != null){
+			product.setTitle(req.getTitle());
+		}
+
+		if (req.getPrice() != 0) {
+			product.setPrice(req.getPrice());
+		}
+
+		if (req.getDiscountedPrice() != 0) {
+			product.setDiscountedPrice(req.getDiscountedPrice());
+		}
+
+		if (req.getDiscountPersent() != 0){
+			product.setDiscountPersent(req.getDiscountPersent());
+		}
+
+		if (req.getBrand() != null) {
+			product.setBrand(req.getBrand());
+		}
+
+		if (req.getColor() != null) {
+			product.setColor(req.getColor());
+		}
 		
-		if(req.getQuantity()!=0) {
+		if(req.getQuantity() != 0) {
 			product.setQuantity(req.getQuantity());
 		}
 
-		if(req.getDescription()!=null) {
+		if(req.getDescription() != null) {
 			product.setDescription(req.getDescription());
+		}
+
+		if (req.getCategory() != null){
+			product.setCategory(req.getCategory());
 		}
 
 		return productRepository.save(product);
