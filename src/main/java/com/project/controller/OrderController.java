@@ -35,8 +35,8 @@ public class OrderController {
 	public ResponseEntity<Order> createOrderHandler(@RequestBody Address spippingAddress,
 			@RequestHeader("Authorization")String jwt) throws UserException{
 		
-		User user=userService.findUserProfileByJwt(jwt);
-		Order order =orderService.createOrder(user, spippingAddress);
+		User user = userService.findUserProfileByJwt(jwt);
+		Order order = orderService.createOrder(user, spippingAddress);
 		
 		return new ResponseEntity<Order>(order,HttpStatus.OK);
 		

@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.exception.ProductException;
+import com.project.modal.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.exception.OrderException;
-import com.project.modal.Address;
-import com.project.modal.Cart;
-import com.project.modal.CartItem;
-import com.project.modal.Order;
-import com.project.modal.OrderItem;
-import com.project.modal.User;
 import com.project.repository.AddressRepository;
 import com.project.repository.OrderItemRepository;
 import com.project.repository.OrderRepository;
@@ -31,31 +28,34 @@ public class OrderServiceImplementation implements OrderService {
 	private UserRepository userRepository;
 	private OrderItemService orderItemService;
 	private OrderItemRepository orderItemRepository;
-	
+	private ProductService productService;
+
+	@Autowired
 	public OrderServiceImplementation(OrderRepository orderRepository,CartService cartService,
 			AddressRepository addressRepository,UserRepository userRepository,
-			OrderItemService orderItemService,OrderItemRepository orderItemRepository) {
+			OrderItemService orderItemService,OrderItemRepository orderItemRepository, ProductService productService) {
 		this.orderRepository=orderRepository;
 		this.cartService=cartService;
 		this.addressRepository=addressRepository;
 		this.userRepository=userRepository;
 		this.orderItemService=orderItemService;
 		this.orderItemRepository=orderItemRepository;
+		this.productService = productService;
 	}
 
 	@Override
 	public Order createOrder(User user, Address shippAddress) {
 		
 		shippAddress.setUser(user);
-		Address address= addressRepository.save(shippAddress);
+		Address address = addressRepository.save(shippAddress);
 		user.getAddresses().add(address);
 		userRepository.save(user);
 		
-		Cart cart=cartService.findUserCart(user.getId());
-		List<OrderItem> orderItems=new ArrayList<>();
+		Cart cart = cartService.findUserCart(user.getId());
+		List<OrderItem> orderItems = new ArrayList<>();
 		
 		for(CartItem item: cart.getCartItems()) {
-			OrderItem orderItem=new OrderItem();
+			OrderItem orderItem = new OrderItem();
 			
 			orderItem.setPrice(item.getPrice());
 			orderItem.setProduct(item.getProduct());
@@ -63,15 +63,27 @@ public class OrderServiceImplementation implements OrderService {
 			orderItem.setSize(item.getSize());
 			orderItem.setUserId(item.getUserId());
 			orderItem.setDiscountedPrice(item.getDiscountedPrice());
-			
-			
-			OrderItem createdOrderItem=orderItemRepository.save(orderItem);
-			
+
+			OrderItem createdOrderItem = orderItemRepository.save(orderItem);
+
+			Product product = item.getProduct();
+			int remainingQuantity = product.getQuantity() - item.getQuantity();
+
+			if (remainingQuantity >= 0) {
+				product.setQuantity(remainingQuantity);
+				try {
+					productService.updateProduct(product.getId(), product);
+				} catch (ProductException e) {
+					System.out.println("Error when update product");
+				}
+			} else {
+				System.out.println("Error quantity");
+			}
+
 			orderItems.add(createdOrderItem);
 		}
-		
-		
-		Order createdOrder=new Order();
+
+		Order createdOrder = new Order();
 		createdOrder.setUser(user);
 		createdOrder.setOrderItems(orderItems);
 		createdOrder.setTotalPrice(cart.getTotalPrice());
@@ -85,9 +97,9 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.getPaymentDetails().setStatus(PaymentStatus.PENDING);
 		createdOrder.setCreatedAt(LocalDateTime.now());
 		
-		Order savedOrder=orderRepository.save(createdOrder);
+		Order savedOrder = orderRepository.save(createdOrder);
 		
-		for(OrderItem item:orderItems) {
+		for (OrderItem item : orderItems) {
 			item.setOrder(savedOrder);
 			orderItemRepository.save(item);
 		}

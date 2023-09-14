@@ -32,7 +32,7 @@ public class CartItemServiceImplementation implements CartItemService {
 		cartItem.setPrice(cartItem.getProduct().getPrice()*cartItem.getQuantity());
 		cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice()*cartItem.getQuantity());
 		
-		CartItem createdCartItem=cartItemRepository.save(cartItem);
+		CartItem createdCartItem = cartItemRepository.save(cartItem);
 		
 		return createdCartItem;
 	}
@@ -40,8 +40,8 @@ public class CartItemServiceImplementation implements CartItemService {
 	@Override
 	public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
 		
-		CartItem item=findCartItemById(id);
-		User user=userService.findUserById(item.getUserId());
+		CartItem item = findCartItemById(id);
+		User user = userService.findUserById(item.getUserId());
 
 		if(user.getId().equals(userId)) {
 			
