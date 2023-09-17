@@ -19,6 +19,7 @@ public class Review {
 	private Long id;
 	
 	private String review;
+	private int star;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -35,10 +36,11 @@ public class Review {
 		
 	}
 
-	public Review(Long id, String review, Product product, User user, LocalDateTime createdAt) {
+	public Review(Long id, String review, int star, Product product, User user, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.review = review;
+		this.star = star;
 		this.product = product;
 		this.user = user;
 		this.createdAt = createdAt;
@@ -68,6 +70,14 @@ public class Review {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getStar() {
+		return star;
+	}
+
+	public void setStar(int star) {
+		this.star = star;
 	}
 
 	public String getReview() {

@@ -28,12 +28,13 @@ public class ReviewServiceImplementation implements ReviewService {
 
 	@Override
 	public Review createReview(ReviewRequest req,User user) throws ProductException {
-		// TODO Auto-generated method stub
+
 		Product product=productService.findProductById(req.getProductId());
 		Review review=new Review();
 		review.setUser(user);
 		review.setProduct(product);
 		review.setReview(req.getReview());
+		review.setStar(req.getStar());
 		review.setCreatedAt(LocalDateTime.now());
 		
 //		product.getReviews().add(review);

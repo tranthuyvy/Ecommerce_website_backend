@@ -6,6 +6,8 @@ public class ReviewRequest {
 
 	private String review;
 
+	private int star;
+
 	//getter and setter
 
 	public Long getProductId() {
@@ -23,5 +25,12 @@ public class ReviewRequest {
 	public void setReview(String review) {
 		this.review = review;
 	}
-	
+
+	public int getStar() {
+		return star;
+	}
+
+	public void setStar(int star) {
+		this.star = star;
+	}
 }
