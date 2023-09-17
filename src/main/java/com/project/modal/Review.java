@@ -19,7 +19,7 @@ public class Review {
 	private Long id;
 	
 	private String review;
-	private int star;
+	private float star;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -36,7 +36,7 @@ public class Review {
 		
 	}
 
-	public Review(Long id, String review, int star, Product product, User user, LocalDateTime createdAt) {
+	public Review(Long id, String review, float star, Product product, User user, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.review = review;
@@ -72,11 +72,11 @@ public class Review {
 		this.id = id;
 	}
 
-	public int getStar() {
+	public float getStar() {
 		return star;
 	}
 
-	public void setStar(int star) {
+	public void setStar(float star) {
 		this.star = star;
 	}
 

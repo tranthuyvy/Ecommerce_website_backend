@@ -6,7 +6,7 @@ public class ReviewRequest {
 
 	private String review;
 
-	private int star;
+	private float star;
 
 	//getter and setter
 
@@ -26,11 +26,11 @@ public class ReviewRequest {
 		this.review = review;
 	}
 
-	public int getStar() {
+	public float getStar() {
 		return star;
 	}
 
-	public void setStar(int star) {
+	public void setStar(float star) {
 		this.star = star;
 	}
 }
