@@ -67,6 +67,9 @@ public class Product {
 
     @Column(name = "num_ratings")
     private int numRatings;
+
+	@Column(name = "status")
+	private int status;
     
 
     @ManyToOne()
@@ -81,7 +84,7 @@ public class Product {
 
 	public Product(Long id, String title, String description, int price, int discountedPrice, int discountPersent,
 			int quantity, String brand, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings,
-			List<Review> reviews, int numRatings, Category category, LocalDateTime createdAt) {
+			List<Review> reviews, int numRatings, int status, Category category, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -99,6 +102,7 @@ public class Product {
 		this.numRatings = numRatings;
 		this.category = category;
 		this.createdAt = createdAt;
+		this.status = 0;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -212,6 +216,14 @@ public class Product {
 
 	public void setNumRatings(int numRatings) {
 		this.numRatings = numRatings;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Category getCategory() {

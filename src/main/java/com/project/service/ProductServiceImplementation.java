@@ -79,6 +79,7 @@ public class ProductServiceImplementation implements ProductService {
 		product.setPrice(req.getPrice());
 		product.setSizes(req.getSize());
 		product.setQuantity(req.getQuantity());
+		product.setStatus(0);
 		product.setCategory(thirdLevel);
 		product.setCreatedAt(LocalDateTime.now());
 		
@@ -95,12 +96,14 @@ public class ProductServiceImplementation implements ProductService {
 		Product product = findProductById(productId);
 		
 		System.out.println("delete product " + product.getId() + " - " + productId);
-		product.getSizes().clear();
+//		product.getSizes().clear();
 //		productRepository.save(product);
 //		product.getCategory().
-		productRepository.delete(product);
+//		productRepository.delete(product);
+		product.setStatus(1);
+		productRepository.save(product);
 		
-		return "Deleted Success";
+		return "Stopped Selling Success";
 	}
 
 	@Override
