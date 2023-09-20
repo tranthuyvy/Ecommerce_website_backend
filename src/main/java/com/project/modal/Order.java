@@ -57,15 +57,26 @@ public class Order {
     
     private LocalDateTime createdAt;
 
+	@Column(name = "payment_status")
+	private int paymentStatus;
+
     public Order() {
 		
+	}
+
+	//getter and setter
+
+	public int getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(int paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
-
-	//getter and setter
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;

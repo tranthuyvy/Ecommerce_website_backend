@@ -94,7 +94,8 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.setShippingAddress(address);
 		createdOrder.setOrderDate(LocalDateTime.now());
 		createdOrder.setOrderStatus(OrderStatus.PLACED);
-		createdOrder.getPaymentDetails().setStatus(PaymentStatus.PENDING);
+		createdOrder.setPaymentStatus(0);
+//		createdOrder.getPaymentDetails().setStatus(PaymentStatus.PENDING);
 		createdOrder.setCreatedAt(LocalDateTime.now());
 		
 		Order savedOrder = orderRepository.save(createdOrder);
@@ -110,7 +111,7 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order placedOrder(Long orderId) throws OrderException {
-		Order order=findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.PLACED);
 		order.getPaymentDetails().setStatus(PaymentStatus.COMPLETED);
 		return order;
@@ -118,7 +119,7 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order confirmedOrder(Long orderId) throws OrderException {
-		Order order=findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.CONFIRMED);
 
 		return orderRepository.save(order);
@@ -126,21 +127,22 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order shippedOrder(Long orderId) throws OrderException {
-		Order order=findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.SHIPPED);
 		return orderRepository.save(order);
 	}
 
 	@Override
 	public Order deliveredOrder(Long orderId) throws OrderException {
-		Order order=findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.DELIVERED);
+		order.setDeliveryDate(LocalDateTime.now());
 		return orderRepository.save(order);
 	}
 
 	@Override
 	public Order cancledOrder(Long orderId) throws OrderException {
-		Order order=findOrderById(orderId);
+		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.CANCELLED);
 		return orderRepository.save(order);
 	}
