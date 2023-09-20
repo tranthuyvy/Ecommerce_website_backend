@@ -111,7 +111,7 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order updateOrder(Long orderId) throws OrderException {
-
+		System.out.println("update payment status");
 		Order order = findOrderById(orderId);
 		order.setPaymentStatus(1);
 		return orderRepository.save(order);
