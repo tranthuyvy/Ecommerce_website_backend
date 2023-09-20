@@ -110,6 +110,14 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
+	public Order updateOrder(Long orderId) throws OrderException {
+
+		Order order = findOrderById(orderId);
+		order.setPaymentStatus(1);
+		return orderRepository.save(order);
+	}
+
+	@Override
 	public Order placedOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
 		order.setOrderStatus(OrderStatus.PLACED);
