@@ -81,7 +81,9 @@ public class UserServiceImplementation implements UserService {
 			if (existingUserWithEmail != null) {
 				throw new UserException("Email đã tồn tại");
 			}
-			currentUser.setEmail(updatedUser.getEmail());
+			if (updatedUser.getEmail() != null) {
+				currentUser.setEmail(updatedUser.getEmail());
+			}
 		}
 
 		currentUser.setPoints(updatedUser.getPoints());
