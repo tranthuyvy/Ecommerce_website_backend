@@ -84,6 +84,8 @@ public class UserServiceImplementation implements UserService {
 			currentUser.setEmail(updatedUser.getEmail());
 		}
 
+		currentUser.setPoints(updatedUser.getPoints());
+
 		return userRepository.save(currentUser);
 	}
 

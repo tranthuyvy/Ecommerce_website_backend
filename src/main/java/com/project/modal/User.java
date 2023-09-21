@@ -45,7 +45,7 @@ public class User {
     private String mobile;
 
 	@Column(name = "points")
-	private int points;
+	private float points;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses=new ArrayList<>();
@@ -70,7 +70,7 @@ public class User {
 	}
 
 	public User(Long id, String firstName, String lastName, String password, String email, UserRole role, String mobile,
-			int points, List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
+			float points, List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
 			List<Review> reviews, LocalDateTime createdAt) {
 		super();
 		this.id = id;
@@ -91,11 +91,11 @@ public class User {
 	//getter and setter
 
 
-	public int getPoints() {
+	public float getPoints() {
 		return points;
 	}
 
-	public void setPoints(int points) {
+	public void setPoints(float points) {
 		this.points = points;
 	}
 
