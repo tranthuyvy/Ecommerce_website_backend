@@ -5,20 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.user.domain.Rank;
 import com.project.user.domain.UserRole;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -46,8 +36,13 @@ public class User {
 
 	@Column(name = "points")
 	private float points;
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@Column(name = "user_rank")
+	@Enumerated(EnumType.STRING)
+	private Rank user_rank;
+
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses=new ArrayList<>();
 
     @Embedded
@@ -71,7 +66,7 @@ public class User {
 
 	public User(Long id, String firstName, String lastName, String password, String email, UserRole role, String mobile,
 			float points, List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
-			List<Review> reviews, LocalDateTime createdAt) {
+			List<Review> reviews, LocalDateTime createdAt, Rank user_rank) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -86,10 +81,19 @@ public class User {
 		this.ratings = ratings;
 		this.reviews = reviews;
 		this.createdAt = createdAt;
+		this.user_rank = user_rank;
 	}
 
 	//getter and setter
 
+
+	public Rank getRank() {
+		return user_rank;
+	}
+
+	public void setRank(Rank user_rank) {
+		this.user_rank = user_rank;
+	}
 
 	public float getPoints() {
 		return points;

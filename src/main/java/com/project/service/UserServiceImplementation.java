@@ -3,6 +3,7 @@ package com.project.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.user.domain.Rank;
 import org.springframework.stereotype.Service;
 
 import com.project.config.JwtTokenProvider;
@@ -87,6 +88,15 @@ public class UserServiceImplementation implements UserService {
 		}
 
 		currentUser.setPoints(updatedUser.getPoints());
+		if (updatedUser.getPoints() >= 0 && updatedUser.getPoints() < 200) {
+			currentUser.setRank(Rank.BRONZE);
+		} else if (updatedUser.getPoints() >= 200 && updatedUser.getPoints() < 400) {
+			currentUser.setRank(Rank.SILVER);
+		} else if (updatedUser.getPoints() >= 400 && updatedUser.getPoints() < 600) {
+			currentUser.setRank(Rank.GOLD);
+		} else {
+			currentUser.setRank(Rank.DIAMOND);
+		}
 
 		return userRepository.save(currentUser);
 	}
