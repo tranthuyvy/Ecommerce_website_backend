@@ -51,6 +51,11 @@ public class AdminOrderController {
 		Order order = orderService.cancledOrder(orderId);
 		return new ResponseEntity<Order>(order,HttpStatus.ACCEPTED);
 	}
+	@PutMapping("/{orderId}/success")
+	public ResponseEntity<Order> successOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{
+		Order order = orderService.successOrder(orderId);
+		return new ResponseEntity<Order>(order,HttpStatus.ACCEPTED);
+	}
 	
 	@DeleteMapping("/{orderId}/delete")
 	public ResponseEntity<ApiResponse> deleteOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{

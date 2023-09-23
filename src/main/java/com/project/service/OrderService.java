@@ -30,5 +30,6 @@ public interface OrderService {
 	public Order deleteOrder(Long orderId) throws OrderException;
 
 	public Order updateOrder (Long orderId) throws OrderException;
+	public Order successOrder (Long orderId) throws OrderException;
 	
 }

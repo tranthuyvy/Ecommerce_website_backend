@@ -154,6 +154,12 @@ public class OrderServiceImplementation implements OrderService {
 		order.setOrderStatus(OrderStatus.CANCELLED);
 		return orderRepository.save(order);
 	}
+	@Override
+	public Order successOrder(Long orderId) throws OrderException {
+		Order order = findOrderById(orderId);
+		order.setOrderStatus(OrderStatus.SUCCESS);
+		return orderRepository.save(order);
+	}
 
 	@Override
 	public Order deleteOrder(Long orderId) throws OrderException {
