@@ -94,12 +94,11 @@ public class OrderController {
 		List<Order> cancelledOrders = orderRepository.getCancelledOrders(user.getId());
 		return new ResponseEntity<>(cancelledOrders, HttpStatus.OK);
 	}
+
 	@GetMapping("/success")
 	public ResponseEntity<List<Order>> getSuccessOrdersForUser(@RequestHeader("Authorization") String jwt) throws UserException{
 		User user = userService.findUserProfileByJwt(jwt);
 		List<Order> successOrders = orderRepository.getSuccessOrders(user.getId());
 		return new ResponseEntity<>(successOrders, HttpStatus.OK);
 	}
-
-
 }
